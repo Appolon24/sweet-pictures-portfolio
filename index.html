@@ -292,7 +292,7 @@
   <div class="stats-today">
     <div>
       <div class="stats-big" id="statsTodayCount">—</div>
-      <div class="stats-big-label">visiteurs aujourd'hui</div>
+      <div class="stats-big-label">visiteurs aujourd&#39;hui</div>
     </div>
     <div>
       <div class="stats-big" id="statsTotalCount">—</div>
@@ -455,7 +455,7 @@
       animateSplash(50, 'Chargement des galeries...');
       const res = await fetch(SCRIPT_URL + '?t=' + Date.now());
       if (!res.ok) throw new Error('HTTP ' + res.status);
-      animateSplash(80, 'Préparation de l'affichage...');
+      animateSplash(80, 'Préparation...');
       const json = await res.json();
       const rows = json.rows || json; // compatibilité ancien/nouveau format
       const stats = json.stats || null;
@@ -464,7 +464,13 @@
         if (!row[0]) return;
         const cat = String(row[0]).trim();
         if (!db[cat]) db[cat] = [];
-        db[cat].push({ name: row[1]||'', date: row[2]||'', link: row[3]||'', note: row[4]||'' });
+        // Google Sheets convertit les dates en ISO string — on reformate
+        let date = row[2] || '';
+        if (date && date.toString().includes('T') && date.toString().includes('Z')) {
+          const d = new Date(date);
+          date = d.toLocaleDateString('fr-BE', {weekday:'long', day:'numeric', month:'long', year:'numeric'});
+        }
+        db[cat].push({ name: row[1]||'', date: date, link: row[3]||'', note: row[4]||'' });
       });
       animateSplash(100, 'Bienvenue !');
       renderCategories();
@@ -472,9 +478,9 @@
       setTimeout(hideSplash, 400);
     } catch(e) {
       console.error('Erreur chargement:', e);
-      animateSplash(100, 'Erreur — rechargez la page');
+      animateSplash(100, 'Erreur - rechargez');
       setTimeout(hideSplash, 1200);
-      showToast('Erreur de chargement — réessayez', 'error');
+      showToast('Erreur de chargement', 'error');
       renderCategories();
     }
   }
@@ -644,7 +650,7 @@
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape') { closeModal(); closeLogin(); }
   });
-  // Sécurité : masquer le splash après 12s maximum même si erreur réseau
+  // Securite : masquer le splash apres 12s max
   setTimeout(() => { hideSplash(); renderCategories(); }, 12000);
   loadData();
 </script>
