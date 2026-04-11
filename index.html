@@ -472,9 +472,9 @@
       setTimeout(hideSplash, 400);
     } catch(e) {
       console.error('Erreur chargement:', e);
-      animateSplash(100, 'Erreur de chargement');
-      setTimeout(hideSplash, 800);
-      showToast('Erreur de chargement', 'error');
+      animateSplash(100, 'Erreur — rechargez la page');
+      setTimeout(hideSplash, 1200);
+      showToast('Erreur de chargement — réessayez', 'error');
       renderCategories();
     }
   }
@@ -640,4 +640,13 @@
     await saveData();
   }
 
-  // ── INIT ───────────────────────────────�
+  // ── INIT ─────────────────────────────────────────────────────────────────
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') { closeModal(); closeLogin(); }
+  });
+  // Sécurité : masquer le splash après 12s maximum même si erreur réseau
+  setTimeout(() => { hideSplash(); renderCategories(); }, 12000);
+  loadData();
+</script>
+</body>
+</html>
