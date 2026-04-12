@@ -29,6 +29,14 @@
 <meta name="twitter:description" content="Portfolio de Sweet Pictures, photographe professionnel à Bruxelles. Mariage, baptême, anniversaire, portraits, famille et vidéo.">
 <meta name="twitter:image" content="https://appolon24.github.io/sweet-pictures-portfolio/preview.jpg">
 <link rel="canonical" href="https://appolon24.github.io/sweet-pictures-portfolio/">
+<!-- PERFORMANCE : preconnect -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://script.google.com">
+<link rel="dns-prefetch" href="https://photos.app.goo.gl">
+<link rel="dns-prefetch" href="https://wa.me">
+<!-- Cache local des galeries -->
+<meta http-equiv="Cache-Control" content="max-age=3600">
 <meta name="google-site-verification" content="1xs9pKwlCMQw0yYjbhUVmx9PDf0Xq6Q7i1ZLhDoyyT0" />
 <script type="application/ld+json">
 {
@@ -63,7 +71,7 @@
   "sameAs": ["https://wa.me/32476771185"]
 }
 </script>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Nunito:wght@300;400;500;600;700&display=swap&display=swap" rel="stylesheet">
 <style>
   :root {
     --pink:#e8547a; --pink-light:#f28fab; --pink-glow:rgba(232,84,122,0.25);
@@ -72,7 +80,7 @@
     --white-dim:rgba(255,255,255,0.35);
   }
   *{margin:0;padding:0;box-sizing:border-box;}
-  body{background:var(--black);color:var(--white);font-family:'Nunito',sans-serif;min-height:100vh;overflow-x:hidden;}
+  body{background:var(--black);color:var(--white);font-family:'Nunito',sans-serif;min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased;text-rendering:optimizeSpeed;}
   header{text-align:center;padding:70px 20px 50px;position:relative;background:linear-gradient(180deg,#0f0408 0%,var(--black) 100%);}
   .header-glow{position:absolute;top:0;left:50%;transform:translateX(-50%);width:400px;height:200px;background:radial-gradient(ellipse at center top,rgba(232,84,122,0.18) 0%,transparent 70%);pointer-events:none;}
   .logo-camera{font-size:2.2rem;margin-bottom:12px;display:block;animation:pulse 3s ease-in-out infinite;}
@@ -119,7 +127,7 @@
   .btn-login-cancel{margin-top:10px;background:none;border:none;color:var(--white-dim);font-family:'Nunito',sans-serif;font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;cursor:pointer;transition:color 0.2s;}
   .btn-login-cancel:hover{color:var(--white);}
   .categories{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:3px;padding:40px 16px 60px;max-width:1200px;margin:0 auto;}
-  .category-card{position:relative;background:var(--black2);cursor:pointer;overflow:hidden;aspect-ratio:4/3;transition:transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94);}
+  .category-card{position:relative;background:var(--black2);cursor:pointer;overflow:hidden;aspect-ratio:4/3;transition:transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94);will-change:transform;contain:layout style;}
   .category-card:hover{transform:scale(1.03);z-index:2;}
   .card-bg-emoji{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:6rem;opacity:0.06;transition:opacity 0.4s,transform 0.5s;transform:scale(1.1);}
   .category-card:hover .card-bg-emoji{opacity:0.13;transform:scale(1.25);}
@@ -265,10 +273,10 @@
   <div class="splash-text" id="splashText">Chargement des galeries...</div>
 </div>
 
-<button class="admin-toggle" id="adminToggle" onclick="toggleAdmin()">🔐 Admin</button>
+<button class="admin-toggle" id="adminToggle" onclick="toggleAdmin()" aria-label="Accès espace administrateur">🔐 Admin</button>
 <div class="admin-badge" id="adminBadge">✦ Mode Admin actif</div>
 
-<header>
+<header role="banner">
   <div class="header-glow"></div>
   <span class="logo-camera">📷</span>
   <h1 class="logo-text">Sweet <span>Pictures</span></h1>
@@ -280,7 +288,7 @@
   </div>
   <p class="subtitle">Portfolio · Galeries Clients</p>
 
-  <a href="https://wa.me/32476771185?text=Bonjour%20Sweet%20Pictures%2C%20je%20souhaite%20réserver%20une%20séance%20photo%20!" target="_blank" class="whatsapp-header-btn">
+  <a href="https://wa.me/32476771185?text=Bonjour%20Sweet%20Pictures%2C%20je%20souhaite%20réserver%20une%20séance%20photo%20!" target="_blank" class="whatsapp-header-btn" aria-label="Contacter Sweet Pictures sur WhatsApp pour réserver">
     <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
     <div class="pulse"></div>
     Me contacter · Réserver
@@ -290,12 +298,12 @@
     <a href="https://www.google.com/search?sa=X&sca_esv=1cbbef248ef25653&hl=fr&authuser=0&q=Sweet+Pictures+Avis&rflfq=1&num=20&stick=H4sIAAAAAAAAAONgkxIxNDawMLYwNDA0N7SwNDE3tDQzMd3AyPiKUTi4PDW1RCEgM7mktCi1WMGxLLN4ESs2UQDFLl9FRwAAAA&rldimm=13083810171894719645&tbm=lcl#lkt=LocalPoiReviews" target="_blank" class="google-reviews-badge">
       <div class="google-logo"><span class="g-blue">G</span><span class="g-red">o</span><span class="g-yellow">o</span><span class="g-blue">g</span><span class="g-green">l</span><span class="g-red">e</span></div>
       <div class="reviews-stars">★★★★★</div>
-      <div class="reviews-text"><strong>Avis clients</strong> · Voir nos avis</div>
+      <div class="reviews-text" aria-label="Voir les avis Google de Sweet Pictures"><strong>Avis clients</strong> · Voir nos avis</div>
     </a>
   </div>
 </header>
 
-<div class="categories" id="categoriesGrid">
+<main role="main"><div class="categories" id="categoriesGrid">
   <div class="loading"><span>Chargement...</span></div>
 </div>
 
@@ -315,7 +323,7 @@
   <div class="stats-chart" id="statsChart"></div>
 </div>
 
-<div class="seo-text">
+</main><div class="seo-text">
   <h2>Photographe Professionnel à Bruxelles — Sweet Pictures</h2>
   <p>Sweet Pictures est votre photographe professionnel à Bruxelles, spécialisé en photographie de mariage, baptême, anniversaire, veillée, portrait, famille et vidéo reportage. Nous couvrons Bruxelles, Ixelles, Schaerbeek, Anderlecht, Etterbeek, Molenbeek et toute la Belgique. Contactez-nous au +32 476 771 185 via téléphone ou WhatsApp pour réserver votre séance photo.</p>
 </div>
@@ -326,7 +334,7 @@
       <div class="modal-header-glow"></div>
       <div class="modal-icon" id="modalIcon"></div>
       <div class="modal-title" id="modalTitle"></div>
-      <button class="modal-close" onclick="closeModal()">✕</button>
+      <button class="modal-close" onclick="closeModal()" aria-label="Fermer la galerie">✕</button>
     </div>
     <div class="modal-body">
       <div class="add-form" id="addForm">
@@ -353,15 +361,15 @@
     <input type="password" id="passwordInput" placeholder="Mot de passe" onkeydown="if(event.key==='Enter')checkPassword()"/>
     <div class="login-error" id="loginError">❌ Mot de passe incorrect</div>
     <button class="btn-login" onclick="checkPassword()">✦ Connexion</button><br>
-    <button class="btn-login-cancel" onclick="closeLogin()">Annuler</button>
+    <button class="btn-login-cancel" onclick="closeLogin()" aria-label="Annuler la connexion">Annuler</button>
   </div>
 </div>
 
-<footer>
+<footer role="contentinfo">
   <div class="footer-logo">Sweet <span>Pictures</span></div>
   <div class="footer-tagline">Photographe Professionnel · Bruxelles</div>
   <div class="footer-contact">
-    <a href="tel:+32476771185" class="footer-contact-item">
+    <a href="tel:+32476771185" class="footer-contact-item" aria-label="Appeler Sweet Pictures au +32 476 771 185">
       <span class="icon">📞</span>
       <span class="label"><span class="label-title">Téléphone</span><span class="label-value">+32 476 771 185</span></span>
     </a>
@@ -376,7 +384,7 @@
   </div>
   <div class="footer-reviews">
     <div class="footer-reviews-title">Nos avis clients</div>
-    <a href="https://www.google.com/search?sa=X&sca_esv=1cbbef248ef25653&hl=fr&authuser=0&q=Sweet+Pictures+Avis&rflfq=1&num=20&stick=H4sIAAAAAAAAAONgkxIxNDawMLYwNDA0N7SwNDE3tDQzMd3AyPiKUTi4PDW1RCEgM7mktCi1WMGxLLN4ESs2UQDFLl9FRwAAAA&rldimm=13083810171894719645&tbm=lcl#lkt=LocalPoiReviews" target="_blank" class="footer-reviews-link">
+    <a href="https://www.google.com/search?sa=X&sca_esv=1cbbef248ef25653&hl=fr&authuser=0&q=Sweet+Pictures+Avis&rflfq=1&num=20&stick=H4sIAAAAAAAAAONgkxIxNDawMLYwNDA0N7SwNDE3tDQzMd3AyPiKUTi4PDW1RCEgM7mktCi1WMGxLLN4ESs2UQDFLl9FRwAAAA&rldimm=13083810171894719645&tbm=lcl#lkt=LocalPoiReviews" target="_blank" class="footer-reviews-link" aria-label="Voir et laisser un avis Google pour Sweet Pictures">
       <div class="g-logo-big"><span class="g-blue">G</span><span class="g-red">o</span><span class="g-yellow">o</span><span class="g-blue">g</span><span class="g-green">l</span><span class="g-red">e</span></div>
       <div class="footer-stars">★★★★★</div>
       <div class="footer-reviews-info">
@@ -388,15 +396,15 @@
   </div>
   <!-- RÉSEAUX SOCIAUX -->
   <div class="footer-social">
-    <a href="https://www.instagram.com/sweetpictures237?igsh=MTFvcDAybHRtaGJjNg==" target="_blank" class="social-btn instagram">
+    <a href="https://www.instagram.com/sweetpictures237?igsh=MTFvcDAybHRtaGJjNg==" target="_blank" class="social-btn instagram" aria-label="Suivre Sweet Pictures sur Instagram">
       <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
       Instagram
     </a>
-    <a href="https://www.facebook.com/share/17sLgUh13d/" target="_blank" class="social-btn facebook">
+    <a href="https://www.facebook.com/share/17sLgUh13d/" target="_blank" class="social-btn facebook" aria-label="Suivre Sweet Pictures sur Facebook">
       <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
       Facebook
     </a>
-    <a href="https://youtube.com/@sweetpicture-z5g?si=nRFe_LeAWX2raC8g" target="_blank" class="social-btn youtube">
+    <a href="https://youtube.com/@sweetpicture-z5g?si=nRFe_LeAWX2raC8g" target="_blank" class="social-btn youtube" aria-label="Voir les vidéos Sweet Pictures sur YouTube">
       <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
       YouTube
     </a>
@@ -461,40 +469,76 @@
     }).join('');
   }
 
+  // ── CACHE LOCAL ──────────────────────────────────────────────────────────
+  const CACHE_KEY = 'sp_gallery_cache';
+  const CACHE_TTL = 5 * 60 * 1000; // 5 minutes
+
+  function parseRows(rows) {
+    const result = {};
+    rows.forEach(row => {
+      if (!row[0]) return;
+      const cat = String(row[0]).trim();
+      if (!result[cat]) result[cat] = [];
+      let date = row[2] || '';
+      if (date && date.toString().includes('T') && date.toString().includes('Z')) {
+        const d = new Date(date);
+        date = d.toLocaleDateString('fr-BE', {weekday:'long', day:'numeric', month:'long', year:'numeric'});
+      }
+      result[cat].push({ name: row[1]||'', date, link: row[3]||'', note: row[4]||'' });
+    });
+    return result;
+  }
+
+  function loadCache() {
+    try {
+      const raw = localStorage.getItem(CACHE_KEY);
+      if (!raw) return null;
+      const { ts, data } = JSON.parse(raw);
+      if (Date.now() - ts > CACHE_TTL) return null;
+      return data;
+    } catch(e) { return null; }
+  }
+
+  function saveCache(data) {
+    try { localStorage.setItem(CACHE_KEY, JSON.stringify({ ts: Date.now(), data })); } catch(e) {}
+  }
+
   // ── CHARGER DEPUIS GOOGLE SHEETS ─────────────────────────────────────────
   async function loadData() {
-    animateSplash(20, 'Connexion au serveur...');
+    animateSplash(20, 'Chargement...');
+
+    // 1. Afficher le cache immédiatement si disponible (évite le cold start visible)
+    const cached = loadCache();
+    if (cached) {
+      db = cached;
+      renderCategories();
+      animateSplash(70, 'Mise à jour...');
+      hideSplash();
+    }
+
+    // 2. Charger depuis le serveur en arrière-plan
     try {
-      animateSplash(50, 'Chargement des galeries...');
       const res = await fetch(SCRIPT_URL + '?t=' + Date.now());
       if (!res.ok) throw new Error('HTTP ' + res.status);
-      animateSplash(80, 'Préparation...');
       const json = await res.json();
-      const rows = json.rows || json; // compatibilité ancien/nouveau format
+      const rows = json.rows || json;
       const stats = json.stats || null;
-      db = {};
-      rows.forEach(row => {
-        if (!row[0]) return;
-        const cat = String(row[0]).trim();
-        if (!db[cat]) db[cat] = [];
-        // Google Sheets convertit les dates en ISO string — on reformate
-        let date = row[2] || '';
-        if (date && date.toString().includes('T') && date.toString().includes('Z')) {
-          const d = new Date(date);
-          date = d.toLocaleDateString('fr-BE', {weekday:'long', day:'numeric', month:'long', year:'numeric'});
-        }
-        db[cat].push({ name: row[1]||'', date: date, link: row[3]||'', note: row[4]||'' });
-      });
-      animateSplash(100, 'Bienvenue !');
+      db = parseRows(rows);
+      saveCache(db);
       renderCategories();
       if (stats) renderStats(stats);
-      setTimeout(hideSplash, 400);
+      if (!cached) {
+        animateSplash(100, 'Bienvenue !');
+        setTimeout(hideSplash, 300);
+      }
     } catch(e) {
       console.error('Erreur chargement:', e);
-      animateSplash(100, 'Erreur - rechargez');
-      setTimeout(hideSplash, 1200);
-      showToast('Erreur de chargement', 'error');
-      renderCategories();
+      if (!cached) {
+        animateSplash(100, 'Erreur - rechargez');
+        setTimeout(hideSplash, 1200);
+        showToast('Erreur de chargement', 'error');
+        renderCategories();
+      }
     }
   }
 
@@ -620,7 +664,7 @@
             ${ev.note ? `<span>📍 ${ev.note}</span>` : ''}
           </div>
         </div>
-        <a href="${ev.link}" target="_blank" class="event-link">📸 Voir</a>
+        <a href="${ev.link}" target="_blank" rel="noopener noreferrer" class="event-link">📸 Voir</a>
         <button class="btn-delete ${isAdmin ? 'admin-visible' : ''}" onclick="deleteEvent('${catId}',${i})" title="Supprimer">🗑</button>
       </div>`).join('');
   }
