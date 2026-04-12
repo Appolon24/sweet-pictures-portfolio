@@ -38,7 +38,7 @@
   "description": "Photographe professionnel à Bruxelles spécialisé en mariages, baptêmes, anniversaires, portraits, famille, événements et vidéo.",
   "url": "https://appolon24.github.io/sweet-pictures-portfolio/",
   "telephone": "+32476771185",
-  "email": "sweetpicture46@gmail.com",
+  "email": "sweetpicture46[at]gmail.com",
   "image": "https://appolon24.github.io/sweet-pictures-portfolio/preview.jpg",
   "priceRange": "€€",
   "address": {"@type":"PostalAddress","addressLocality":"Bruxelles","addressRegion":"Bruxelles-Capitale","addressCountry":"BE","postalCode":"1000"},
@@ -356,9 +356,9 @@
       <span class="icon">💬</span>
       <span class="label"><span class="label-title">WhatsApp</span><span class="label-value">+32 476 771 185</span></span>
     </a>
-    <a href="/cdn-cgi/l/email-protection#deada9bbbbaaaeb7bdaaabacbbeae89eb9b3bfb7b2f0bdb1b3" class="footer-contact-item">
+    <a href="#" onclick="var u='sweetpicture46',d='gmail.com';this.href='mailto:'+u+'@'+d;return true;" class="footer-contact-item">
       <span class="icon">✉️</span>
-      <span class="label"><span class="label-title">Email</span><span class="label-value"><span class="__cf_email__" data-cfemail="60131705051410090314151205545620070d01090c4e030f0d">[email&#160;protected]</span></span></span>
+      <span class="label"><span class="label-title">Email</span><span class="label-value" id="emailDisplay"></span></span>
     </a>
   </div>
   <div class="footer-reviews">
@@ -650,6 +650,13 @@
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape') { closeModal(); closeLogin(); }
   });
+  // Affichage email anti-Cloudflare
+  (function() {
+    const u = 'sweetpicture46';
+    const d = 'gmail.com';
+    const el = document.getElementById('emailDisplay');
+    if (el) el.textContent = u + '@' + d;
+  })();
   // Securite : masquer le splash apres 12s max
   setTimeout(() => { hideSplash(); renderCategories(); }, 12000);
   loadData();
